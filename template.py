@@ -29,12 +29,15 @@ list_of_files = [
     "experiment/experiments.ipynb"
 ]
 
+
 for filepath in list_of_files:
     filepath = Path(filepath)
     filedir, filename = os.path.split(filepath)
-    if filedir != "":
+    if filedir:
         os.makedirs(filedir, exist_ok=True)
+        print(f"Created directory: {filedir}")
 
-    if (not os.path.exists(filepath)) or (os.path.getsize(filepath) == 0):
+    if not filepath.exists() or filepath.stat().st_size == 0:
         with open(filepath, "w") as f:
-            pass # create an empty file
+            pass  # create an empty file
+        print(f"Created file: {filepath}")
